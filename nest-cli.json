@@ -1,8 +1,32 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src",
+  "sourceRoot": "apps/popcorne/src",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/popcorne/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/popcorne",
+  "projects": {
+    "popcorne": {
+      "type": "application",
+      "root": "apps/popcorne",
+      "entryFile": "main",
+      "sourceRoot": "apps/popcorne/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/popcorne/tsconfig.app.json"
+      }
+    },
+    "vault-api": {
+      "type": "application",
+      "root": "apps/vault-api",
+      "entryFile": "main",
+      "sourceRoot": "apps/vault-api/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/vault-api/tsconfig.app.json"
+      }
+    }
   }
 }
