@@ -1,0 +1,21 @@
+ARG NODE_IMAGE=node:22-slim
+
+FROM ${NODE_IMAGE} AS base
+
+RUN apt-get update && apt-get install -y \
+    procps \
+    python3 \
+    make \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+    
+RUN npm install -g pnpm@9.12.2
+
+FROM base AS development
+WORKDIR /app
+
+EXPOSE 3000
+
+COPY package*.json pnpm-lock.yaml ./
+
+RUN pnpm install
